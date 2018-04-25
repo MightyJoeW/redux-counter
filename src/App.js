@@ -1,13 +1,20 @@
 // EXTERNAL DEPENDENCIES
 import React, { Component } from 'react';
-import { connect } from 'react-reducx';
+import { connect } from 'react-redux';
 
 // INTERNAL DEPENDENCIES
 import './App.css';
+import {decrement, increment } from './state/counter'
 
 // COMPONENT DEFINITION
 class App extends Component {
   render() {
+		const {
+			currentValue,
+			decrement,
+			increment
+		} = this.props;
+
     return (
       <div className='app'>
         <section className='counter'>
@@ -15,25 +22,25 @@ class App extends Component {
           <div className='counter__button-wrapper'>
             <button
               className='counter__button increment-one'
-              onClick={ () => null }
+              onClick={ () => increment(1) }
             >
               +1
             </button>
             <button
               className='counter__button increment-five'
-              onClick={ () => null }
+              onClick={ () => increment(5) }
             >
               +5
             </button>
             <button
               className='counter__button decrement-one'
-              onClick={ () => null }
+              onClick={ () => decrement(1) }
             >
               -1
             </button>
             <button
               className='counter__button decrement-five'
-              onClick={ () => null }
+              onClick={ () => decrement(5) }
             >
               -5
             </button>
@@ -68,4 +75,4 @@ function mapStateToProps(state) {
 	return state;
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { decrement, increment })(App);
