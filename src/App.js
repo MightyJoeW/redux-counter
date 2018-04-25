@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // INTERNAL DEPENDENCIES
 import './App.css';
-import {decrement, increment } from './state/counter'
+import {decrement, increment, redo, undo } from './state/counter'
 
 // COMPONENT DEFINITION
 class App extends Component {
@@ -12,13 +12,20 @@ class App extends Component {
 		const {
 			currentValue,
 			decrement,
-			increment
+			futureValue,
+			increment,
+			previousValue,
+			redo,
+			undo
 		} = this.props;
 
     return (
       <div className='app'>
         <section className='counter'>
-          <h1 className='counter__current-value'>{ 0 }</h1>
+					<h1 className='counter__current-value'>{ currentValue === null
+						? 'Click a button'
+						: currentValue }
+						</h1>
           <div className='counter__button-wrapper'>
             <button
               className='counter__button increment-one'
@@ -47,15 +54,15 @@ class App extends Component {
             <br />
             <button
               className='counter__button undo'
-              disabled={ true }
-              onClick={ () => null }
+              disabled={ previousValue.length === 0 }
+              onClick={ undo }
             >
               Undo
             </button>
             <button
               className='counter__button redo'
-              disabled={ true }
-              onClick={ () => null }
+              disabled={ futureValue.length === 0 }
+              onClick={ redo }
             >
               Redo
             </button>
@@ -75,4 +82,4 @@ function mapStateToProps(state) {
 	return state;
 }
 
-export default connect(mapStateToProps, { decrement, increment })(App);
+export default connect(mapStateToProps, { decrement, increment, redo, undo })(App);
