@@ -1,6 +1,7 @@
-// EXTERNAL DEPENDENCIES
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { decrement, increment, redo, undo } from "./ducks/counter";
 
 // INTERNAL DEPENDENCIES
 import './App.css';
